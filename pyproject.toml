@@ -1,0 +1,43 @@
+[project]
+name = "data-pipeline"
+version = "0.1.0"
+description = "Data pipeline built with Dagster"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dagster>=1.13.22",
+    "dagster-postgres>=0.29.22",
+    "dagster-webserver>=1.13.22",
+]
+
+[project.scripts]
+data-pipeline = "data_pipeline:main"
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "ruff>=0.16.7",
+]
+
+[tool.dagster]
+module_name = "data_pipeline.definitions"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+packages = ["data_pipeline"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

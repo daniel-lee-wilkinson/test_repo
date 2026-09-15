@@ -1,0 +1,11 @@
+.git
+.venv
+.env
+.dagster_home
+DAGSTER_HOME
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+tests

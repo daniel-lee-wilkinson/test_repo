@@ -1,0 +1,27 @@
+# Dagster instance config used by docker-compose (webserver + daemon) so the
+# whole team shares one run/event history instead of separate local sqlite DBs.
+run_storage:
+  module: dagster_postgres.run_storage
+  class: PostgresRunStorage
+  config:
+    postgres_db: &postgres_db
+      username:
+        env: POSTGRES_USER
+      password:
+        env: POSTGRES_PASSWORD
+      hostname: postgres
+      db_name:
+        env: POSTGRES_DB
+      port: 5432
+
+event_log_storage:
+  module: dagster_postgres.event_log
+  class: PostgresEventLogStorage
+  config:
+    postgres_db: *postgres_db
+
+schedule_storage:
+  module: dagster_postgres.schedule_storage
+  class: PostgresScheduleStorage
+  config:
+    postgres_db: *postgres_db
